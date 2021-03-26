@@ -19,7 +19,7 @@ table.dataTable .sorting:before {
 }
 
 table.table-bordered {
-	background-color: #151515;
+	background-color: #303030;
 	border-color: #444;
 	border-radius: 5px;
 }
@@ -32,7 +32,7 @@ table.table-bordered td {
 	border-right-color: #444;
 }
 pre {
-	background-color: #151515;
+	background-color: #303030;
 	border: 1px solid #444;
 	color: white;
 	border-radius: 1px;
@@ -43,7 +43,7 @@ a, a:hover {
 }
 
 html {
-	background-color: black;
+	background-color: #282828;
 }
 body {
 	background-color: transparent;
