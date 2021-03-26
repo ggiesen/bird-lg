@@ -7,6 +7,10 @@ img, svg {
 	filter: invert(1) hue-rotate(50deg);
 }
 
+polygon {
+	fill: #d7d7d7;
+}
+
 table.dataTable .sorting:after,
 table.dataTable .sorting:before {
 	font-family: monospace;
