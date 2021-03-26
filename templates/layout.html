@@ -69,27 +69,13 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-11 col-md-11">
+				<div class="col-sm-12 col-md-12">
 					{% block body %}{% endblock %}
-				</div>
-				<div class="col-sm-1 col-md-1 request-history">
-					<div class="well" style="padding: 8px 0;">
-						<h4>Request history</h4>
-						<div class="list-group history">
-							{% for hosts, proto, request_type, request_args in session.history %}
-							<a class="list-group-item list-group-item-action {% if loop.first %}active{% endif %}"
-	  href="/{{ [request_type, hosts]|join("/") }}{% if not config.UNIFIED_DAEMON %}/{{proto}}{% endif %}{% if request_args %}?q={{request_args|urlencode}}{% endif %}">
-                {{hosts}}{% if not config.UNIFIED_DAEMON %}/{{proto}}{% endif %}: {{ commands_dict[request_type]|replace("...", request_args) }}
-              </a>
-
-							{% endfor %}
-						</div>
-					</div>
 				</div>
 			</div>
 
 			<div class="footer">
-				<p>bird looking glass, <a href="https://github.com/petabyteboy/bird-lg/">source code</a> under GPL 3.0, powered by <a href="http://flask.pocoo.org">Flask</a>, <a href="http://jquery.com/">jQuery</a> and <a href="https://getbootstrap.com/">Bootstrap</a></p>
+				<p>bird looking glass, <a href="https://github.com/lhaus/bird-lg/">source code</a> under GPL 3.0, powered by <a href="http://flask.pocoo.org">Flask</a>, <a href="http://jquery.com/">jQuery</a> and <a href="https://getbootstrap.com/">Bootstrap</a></p>
 			</div>
 
 			<div class="progress progress-info progress-striped active" style="position:fixed;bottom:0px;right:10px;display:none;height:10px;width:200px;">
