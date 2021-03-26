@@ -169,12 +169,12 @@ def bird_proxy(host, proto, service, query):
 @app.context_processor
 def inject_commands():
     commands = [
-            ("traceroute", "traceroute ..."),
             ("summary", "show protocols"),
             ("detail", "show protocols ... all"),
             ("prefix", "show route for ..."),
             ("prefix_detail", "show route for ... all"),
             ("prefix_bgpmap", "show route for ... (bgpmap)"),
+            ("traceroute", "traceroute ..."),
         ]
     commands_dict = {}
     for id, text in commands:
