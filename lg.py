@@ -227,7 +227,7 @@ def whois():
     return jsonify(output=output, title=query)
 
 # Array of protocols that will be filtered from the summary listing
-SUMMARY_UNWANTED_PROTOS = ["Kernel", "Static", "Device", "BFD", "Direct", "RPKI"]
+SUMMARY_UNWANTED_PROTOS = ["Kernel", "Static", "Device", "BFD", "Direct"]
 # Array of regular expressions to match against protocol names,
 # and filter them from the summary view
 SUMMARY_UNWANTED_NAMES = []
