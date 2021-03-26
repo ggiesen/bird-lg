@@ -169,6 +169,7 @@ def bird_proxy(host, proto, service, query):
 @app.context_processor
 def inject_commands():
     commands = [
+            ("traceroute", "traceroute ..."),
             ("summary", "show protocols"),
             ("detail", "show protocols ... all"),
             ("prefix", "show route for ..."),
@@ -332,6 +333,55 @@ def detail(hosts, proto="ipv4"):
 def show_route_for(hosts, proto="ipv4"):
     return show_route("prefix", hosts, proto)
 
+@app.route("/traceroute/<hosts>")
+@app.route("/traceroute/<hosts>/<proto>")
+def traceroute(hosts, proto="ipv4"):
+    q = get_query()
+
+    if not q:
+        abort(400)
+
+    set_session("traceroute", hosts, proto, q)
+
+    if app.config.get("UNIFIED_DAEMON", False):
+        if not ip_is_valid(q):
+            try:
+                if app.config.get("UNIFIED_TRACEROUTE_IPV6", True):
+                    q = resolve_any(q)
+                else:
+                    q = resolve(q, "A")
+            except:
+                return error_page("%s is unresolvable" % q)
+        if ipv6_is_valid(q):
+            proto = "ipv6"
+        else:
+            proto = "ipv4"
+    else:
+        if proto == "ipv6" and not ipv6_is_valid(q):
+            try:
+                q = resolve(q, "AAAA")
+            except:
+                return error_page("%s is unresolvable or invalid for %s" % (q, proto))
+        if proto == "ipv4" and not ipv4_is_valid(q):
+            try:
+                q = resolve(q, "A")
+            except:
+                return error_page("%s is unresolvable or invalid for %s" % (q, proto))
+
+    errors = []
+    infos = {}
+    hosts = hosts.split("+")
+    if hosts == ["all"]:
+        hosts = app.config["PROXY"].keys()
+    for host in hosts:
+        status, resultat = bird_proxy(host, proto, "traceroute", q)
+        if status is False:
+            errors.append("%s" % resultat)
+            continue
+
+
+        infos[host] = add_links(resultat)
+    return render_template('traceroute.html', infos=infos, errors=errors)
 
 @app.route("/prefix_detail/<hosts>")
 @app.route("/prefix_detail/<hosts>/<proto>")
