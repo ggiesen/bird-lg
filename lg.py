@@ -528,7 +528,7 @@ def render_img(data):
                     if first:
                         hop_label = hop_label + "*"
 
-                add_node(_as, graph, fillcolor=("white"))
+                add_node(_as, graph, fillcolor=("#D7D7D7"))
                 if first:
                     nodes[_as].set_fillcolor("#F5A9A9")
                 if hop_label:
