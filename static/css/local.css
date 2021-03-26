@@ -11,6 +11,21 @@ polygon {
 	fill: #d7d7d7;
 }
 
+::-webkit-scrollbar {
+    height: 12px;
+    width: 12px;
+    background: #282828;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #404040;
+}
+
+::-webkit-scrollbar-corner {
+    background: #404040;
+}
+
+
 table.dataTable .sorting:after,
 table.dataTable .sorting:before {
 	font-family: monospace;
